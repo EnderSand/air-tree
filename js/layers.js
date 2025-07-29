@@ -25,4 +25,19 @@ addLayer("p", {
         {key: "p", description: "P: Reset for prestige points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     layerShown(){return true}
+    upgrades: {
+    1: {
+	title: "efficiency boost",
+        description: "2x air. Nice and simple.",
+        cost: new Decimal(1),
+	effect() {
+		return: new Decimal(2),
+	},
+	effectDisplay(){
+		return: "x" + format(this.effect)
+	},
+        
+    },
+    etc
+}
 })
