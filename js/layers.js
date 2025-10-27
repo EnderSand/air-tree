@@ -10,13 +10,13 @@ addLayer("normal", {
     color: "#CCCCCC",
     requires: new Decimal(10),
     resource: "Normal air",
-    baseResource: "air",
+    baseResource: "Air Essence",
     baseAmount() { return player.points }, 
     type: "normal",
     exponent: 0.75, //scaling, lower = harder higher =  easier, values more than 1 are not recommended and 0.5 is normal. 1 is no scaling (bad :0)
     //notes for myself idk
     gainMult() {
-        console.log("NA gain mults loading")
+        //console.log("NA gain mults loading")
         let mult = new Decimal(1)
         if (hasUpgrade("normal", 12)) mult = mult.times(upgradeEffect("normal", 12))
         if (hasUpgrade("normal", 14)) mult = mult.times(upgradeEffect("normal", 14))
@@ -26,13 +26,12 @@ addLayer("normal", {
     },
 
     gainExp() {
-        console.log("NA gain exp loading (idk what ts is)")
+        //console.log("NA gain exp loading (idk what ts is)")
         return new Decimal(1)
     },
     row: 0,
     
     hotkeys: [
-        console.log("hotkeys loading"),
         {key: "n", description: "N: Extract Normal Air from Air Essence.", onPress() { if (canReset(this.layer)) doReset(this.layer) }},
     ],
     layerShown() { return true },
