@@ -332,7 +332,6 @@ function getPointGen() {
     if (hasUpgrade("normal", 11)) gain = gain.mul(upgradeEffect("normal", 11))
 	if (hasUpgrade("normal", 13)) gain = gain.mul(upgradeEffect("normal", 13))
 	if (hasUpgrade("normal", 15)) gain = gain.mul(upgradeEffect("normal", 15))
-	if (hasUpgrade("normal", 16)) gain = gain.mul(upgradeEffect("normal", 16))
     return gain
 }//point gain increaces
 
