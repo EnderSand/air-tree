@@ -16,26 +16,38 @@ addLayer("normal", {
     exponent: 0.75, //scaling, lower = harder higher =  easier, values more than 1 are not recommended and 0.5 is normal. 1 is no scaling (bad :0)
     //notes for myself idk
     gainMult() {
+        console.log("NA gain mults loading")
         let mult = new Decimal(1)
         if (hasUpgrade("normal", 12)) mult = mult.times(upgradeEffect("normal", 12))
         if (hasUpgrade("normal", 14)) mult = mult.times(upgradeEffect("normal", 14))
         if (hasUpgrade("normal", 18)) mult = mult.times(upgradeEffect("normal", 18))
         return mult
-    //upgrade multipliers
-    
+    //upgrade multipliers   
     },
+
     gainExp() {
+        console.log("NA gain exp loading (idk what ts is)")
         return new Decimal(1)
     },
     row: 0,
+    
     hotkeys: [
+        console.log("hotkeys loading"),
         {key: "n", description: "N: Extract Normal Air from Air Essence.", onPress() { if (canReset(this.layer)) doReset(this.layer) }},
     ],
     layerShown() { return true },
+    
+    infoboxes: {
+        information: {
+            title: "Normal Air Information",
+            body() { return "Normal Air (NA) is the 1st layer. In NA, there are 6 upgrades and 1 buyable (numbers might be inaccurate if i dont update them during updates) (until you get to the other layers)." },
+        },
+    },
+
     upgrades: {//upgrades
         11: {
-            title: "Air extraction efficiency boost",
-            description: "2x air. Nice and simple.",
+            title: "Essence extraction efficiency",
+            description: "Increase the efficiency of extracting Essennce, making gathering Essence twice as fast.",
             cost: new Decimal(3),
             effect() {
                 return new Decimal(2)
@@ -45,8 +57,8 @@ addLayer("normal", {
             },
         },
         12: {
-            title: "Normal Air conversion boost",
-            description: "3x Normal Air.",
+            title: "Normal Air extraction efficiency",
+            description: "Use better methods of extracting the Normal Air from Essence, giving 3 times as much as before.",
             cost: new Decimal(10),
             effect() {
                 return new Decimal(3)
@@ -55,26 +67,26 @@ addLayer("normal", {
                 return "x" + format(this.effect())
             },
             unlocked() {
-                return hasUpgrade("p", 11)
+                return hasUpgrade("normal", 11)
             }
         },
         13: {
-            title: "generic incremental upgrade",
-            description: "You have seen this a million times before, so why not again? :3",
+            title: "Breathing",
+            description: "breathe in the normal air to make extracting air better. wait does that mean u didnt breathe before??? what",
             cost: new Decimal(15),
             effect() {
-                return player.points.add(1).log(5).add(1)
+                return player.points.add(1).log(10).add(1)
             },
             effectDisplay() {
                 return "×" + format(this.effect())
             },
             unlocked() {
-                return hasUpgrade("p", 12)
+                return hasUpgrade("normal", 12)
             }
         },
         14: {
-            title: "Even more efficient converters",
-            description: "Air conversion to normal air is now 5x as efficient.",
+            title: "Normal Air extraction efficiency 2",
+            description: "Normal Air extraction is now 5x as efficient.",
             cost: new Decimal(25),
             effect() {
                 return new Decimal(5)
@@ -83,13 +95,13 @@ addLayer("normal", {
                 return "×" + format(this.effect())
             },
             unlocked() {
-                return hasUpgrade("p", 13)
+                return hasUpgrade("normal", 13)
             }
             
         },
         15: {
-            title: "time to get big numbers!",
-            description: "10x normal air and unlock a buyable :0",
+            title: "Normal Air extraction efficency 3 (pls help with names)",
+            description: "10x normal air and unlock ???",
             cost: new Decimal(100),
             effect() {
                 return new Decimal(10)
@@ -98,26 +110,26 @@ addLayer("normal", {
                 return "×" + format(this.effect())
             },
             unlocked() {
-                return hasUpgrade("p", 14)
+                return hasUpgrade("normal", 14)
             }
         },
         17: {
-            title: "i really need to get to big numbers soon",
-            description: "100x air",
+            title: "Where is the air coming from?",
+            description: "100x NA",
             cost: new Decimal(250),
             effect() {
                 return new Decimal(100)
             },
             unlocked() {   
-                return hasUpgrade("p", 15)
+                return hasUpgrade("normal", 15)
             }
         },
         18: {
-            title: "normal air powered air exractors",
-            description: "Boost air gain by normal air by using normal air",
+            title: "Breathing 2",
+            description: "Introducing breathing 2, which is more efficient than before. Buy breathing 2 now for only 500 NA!",
             cost: new Decimal(500),
             effect() {
-                return player.p.points.add(1).log(5).add(1)
+                return player.normal.points.add(1).log(5).add(1)
             },
             effectDisplay() {
                 return "×" + format(this.effect())
@@ -127,29 +139,29 @@ addLayer("normal", {
     buyables: { //buyables idk
         16: {
             cost(x) {
-                return new Decimal(100).mul(Decimal.pow(3, x || getBuyableAmount("p", 16))) //*3 each time i think
+                return new Decimal(100).mul(Decimal.pow(3, x || getBuyableAmount("normal", 16))) //*3 each time i think
             },
             effect(x) {
                 return Decimal.pow(2, x) //2x air
             },
             display() {
-                const amt = getBuyableAmount("p", 16)
-                return `Double air gain<br>Level: ${amt}<br>Effect: ×${format(this.effect(amt))}<br>Cost: ${format(this.cost(amt))}`
+                const amt = getBuyableAmount("normal", 16)
+                return `Double NA gain!<br>Level: ${amt}<br>Effect: ×${format(this.effect(amt))}<br>Cost: ${format(this.cost(amt))}`
             },
             canAfford() {
-                return player.p.points.gte(this.cost())
+                return player.normal.points.gte(this.cost())
             },
             buy() {
                 let cost = this.cost()
-                if (!player.p.points.gte(cost)) return
-                player.p.points = player.p.points.sub(cost)
-                addBuyables("p", 16, 1)
+                if (!player.normal.points.gte(cost)) return
+                player.normal.points = player.normal.points.sub(cost)
+                addBuyables("normal", 16, 1)
             },
             unlocked() {
-                return hasUpgrade("p", 15)
+                return hasUpgrade("normal", 15)
             },
         },
     },
     
 })
-console.log("Layer loaded")//console log
+console.log("Other layer stuff loaded")//console log
