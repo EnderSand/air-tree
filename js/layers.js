@@ -29,7 +29,7 @@ addLayer("normal", {
     },
     row: 0,
     hotkeys: [
-        {key: "n", description: "N: Transform Air Essence into Normal Air", onPress() { if (canReset(this.layer)) doReset(this.layer) }},
+        {key: "n", description: "N: Extract Normal Air from Air Essence.", onPress() { if (canReset(this.layer)) doReset(this.layer) }},
     ],
     layerShown() { return true },
     upgrades: {//upgrades
