@@ -324,6 +324,19 @@ function autobuyUpgrades(layer){
 			buyUpg(layer, id) 
 }
 
+function getPointGen() {
+    if (!canGenPoints()) return new Decimal(0)
+
+    let gain = new Decimal(1)
+
+    if (hasUpgrade("normal", 11)) gain = gain.mul(upgradeEffect("normal", 11))
+	if (hasUpgrade("normal", 13)) gain = gain.mul(upgradeEffect("normal", 13))
+	if (hasUpgrade("normal", 15)) gain = gain.mul(upgradeEffect("normal", 15))
+	if (hasUpgrade("normal", 16)) gain = gain.mul(upgradeEffect("normal", 16))
+    return gain
+}//point gain increaces
+
+
 function gameLoop(diff) {
 	if (isEndgame() || tmp.gameEnded){
 		tmp.gameEnded = true
