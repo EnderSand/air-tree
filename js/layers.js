@@ -13,7 +13,7 @@ addLayer("normal", {
     baseResource: "Air Essence",
     baseAmount() { return player.points }, 
     type: "normal",
-    exponent: 0.75, //scaling, lower = harder higher =  easier, values more than 1 are not recommended and 0.5 is normal. 1 is no scaling (bad :0)
+    exponent: 0.99, //scaling, lower = harder higher =  easier, values more than 1 are not recommended and 0.5 is normal. 1 is no scaling (bad :0)
     //notes for myself idk
     gainMult() {
         //console.log("NA gain mults loading")
@@ -49,7 +49,7 @@ addLayer("normal", {
         11: {
             title: "Essence extraction efficiency",
             description: "Increase the efficiency of extracting Essennce, making gathering Essence twice as fast.",
-            cost: new Decimal(3),
+            cost: new Decimal(1),
             effect() {
                 return new Decimal(2)
             },
@@ -61,7 +61,7 @@ addLayer("normal", {
         12: {
             title: "Normal Air extraction efficiency",
             description: "Use better methods of extracting the Normal Air from Essence, giving 3 times as much as before.",
-            cost: new Decimal(10),
+            cost: new Decimal(3),
             effect() {
                 return new Decimal(3)
             },
@@ -76,7 +76,7 @@ addLayer("normal", {
         13: {
             title: "Breathing",
             description: "breathe in the Essence to make extracting Essence better. wait does that mean u didnt breathe before??? also why u breathing essence",
-            cost: new Decimal(15),
+            cost: new Decimal(10),
             effect() {
                 return player.points.add(1).log(10).add(1)
             },
@@ -134,7 +134,7 @@ addLayer("normal", {
         18: {
             title: "Breathing with NA",
             description: "Introducing breathing with NA, which boosts NA gain.",
-            cost: new Decimal(500),
+            cost: new Decimal(1000),
             effect() {
                 return player.normal.points.add(1).log(5).add(1)
             },
@@ -145,7 +145,7 @@ addLayer("normal", {
         19: {
             title: "Expand Essence extraction volume",
             description: "Very sensible idea to find more space to extract Essence from.",
-            cost: new Decimal(500),
+            cost: new Decimal(5000),
             effect() {
                 return new Decimal(1000)
             },
